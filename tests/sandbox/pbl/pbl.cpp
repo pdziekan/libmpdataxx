@@ -25,7 +25,7 @@ void test(const std::string &dirname)
     enum { rhs_scheme = solvers::trapez };
     enum { vip_vab = solvers::impl };
     enum { prs_scheme = solvers::cr };
-    enum { impl_tht = true };
+    enum { impl_tht = false };
     struct ix { enum {
       u, v, w, tht,
       vip_i=u, vip_j=v, vip_k=w, vip_den=-1
@@ -110,9 +110,10 @@ void test(const std::string &dirname)
       // environmental potential temperature profile
       slv.sclr_array("tht_e") = 300 * where(k * p.dk <= mixed_length, 1, 1 + (k * p.dk - mixed_length) * st);
       // tht absorber profile
-      slv.sclr_array("tht_abs") = where(k * p.dk >= 1000, 1. / 1020 * (k * p.dk - 1000) / (1500-1000.0), 0);
+      //slv.sclr_array("tht_abs") = where(k * p.dk >= 1000, 1. / 1020 * (k * p.dk - 1000) / (1500-1000.0), 0);
+      slv.sclr_array("tht_abs") = 0.;// where(k * p.dk >= 1000, 1. / 1020 * (k * p.dk - 1000) / (1500-1000.0), 0);
       // velocity absorbers
-      slv.vab_coefficient()(i_r, j_r, k_r) = slv.sclr_array("tht_abs")(i_r, j_r, k_r);
+      slv.vab_coefficient()(i_r, j_r, k_r) = 0.;// slv.sclr_array("tht_abs")(i_r, j_r, k_r);
       slv.vab_relaxed_state(0) = 0;
       slv.vab_relaxed_state(1) = 0;
       slv.vab_relaxed_state(2) = 0;
