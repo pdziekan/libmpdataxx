@@ -46,7 +46,7 @@ void test(const std::string &dirname)
   p.Tht_ref = 300;
   p.g = 10;
   p.hscale = 25;
-  p.cdrag = 0.1;
+  p.cdrag = 0.;
 
   double mixed_length = 500;
   double st = 1e-4 / p.g;
