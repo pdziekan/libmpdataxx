@@ -17,6 +17,8 @@ dist: xenial
 compiler:
     - gcc
     - clang
+python:
+  - "3.6"
 env:
 #    - MPI=none
 #    - MPI=openmpi
