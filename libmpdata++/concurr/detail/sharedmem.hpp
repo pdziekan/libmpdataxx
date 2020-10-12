@@ -211,12 +211,12 @@ namespace libmpdataxx
 #else
           if(rank == 0)
           {
-            (*xtmtmp)(decomp_dim) = blitz::min(*xtmtmp);
+            (*xtmtmp)(0) = blitz::min(*xtmtmp);
             // min across mpi processes
-            (*xtmtmp)(decomp_dim) = this->distmem.min((*xtmtmp)(decomp_dim));
+            (*xtmtmp)(0) = this->distmem.min((*xtmtmp)(0));
           }
           barrier();
-          real_t res = (*xtmtmp)(decomp_dim); // propagate the total min to all threads of the process
+          real_t res = (*xtmtmp)(0); // propagate the total min to all threads of the process
           barrier(); // to avoid xtmtmp being overwritten by some other threads' next sum call
           return res;
 #endif
@@ -235,12 +235,12 @@ namespace libmpdataxx
 #else
           if(rank == 0)
           {
-            (*xtmtmp)(decomp_dim) = blitz::max(*xtmtmp);
+            (*xtmtmp)(0) = blitz::max(*xtmtmp);
             // max across mpi processes
-            (*xtmtmp)(decomp_dim) = this->distmem.max((*xtmtmp)(decomp_dim));
+            (*xtmtmp)(0) = this->distmem.max((*xtmtmp)(0));
           }
           barrier();
-          real_t res = (*xtmtmp)(decomp_dim); // propagate the total max to all threads of the process
+          real_t res = (*xtmtmp)(0); // propagate the total max to all threads of the process
           barrier(); // to avoid xtmtmp being overwritten by some other threads' next sum call
           return res;
 #endif
